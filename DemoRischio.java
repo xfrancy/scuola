@@ -24,6 +24,16 @@ class ContoBancario implements  Verificabile {
        this.saldo = saldo;
     }
 
+    public double prelievo(double quantita){
+        saldo -= quantita;
+        return saldo;
+    }
+
+    public double versamento(double quantita){
+        saldo += quantita;    
+        return saldo;    
+    }
+
     @Override
     public String getTipo() {
         return this.getClass().getSimpleName() + ": " + iban;
@@ -56,6 +66,10 @@ class ImmagineDigitale implements Verificabile {
     public ImmagineDigitale(String nomeFile, double megaByte) {
         this.nomeFile = nomeFile;
         this.megaByte = megaByte;
+    }
+
+    public void blackAndWhite(){
+        megaByte += 0.8;
     }
 
     @Override
@@ -140,6 +154,22 @@ class GestioneRischio {
     }
 }
 
+
+    class AgenziaConsegne {
+        private boolean tentaConsegna(PaccoSpedizione p){
+            return Math.random()*100 > p.getValoreRischio();
+        }
+
+        public boolean[] spedisci(PaccoSpedizione[] pacchi){
+            boolean[] risultati = new boolean[pacchi.length];
+
+            for (int i = 0; i < pacchi.length; i++) {
+                risultati[i] = tentaConsegna(pacchi[i]);
+            }
+            return risultati;
+        }
+    }
+
 /*
 Questa classe contiene il metodo main e sono inseriti i test per il funzionamento del sistema.
 Ad eccezione dell'ultima chiamata (metodo ispeziona), l'output deve essere il seguente:
@@ -194,5 +224,13 @@ public class DemoRischio {
         
         System.out.println("\n--- VALUTAZIONE IMMAGINE ---");
         GestioneRischio.ispeziona(inventario[1]);
+
+        System.out.println("\n--- ESERCIZIO 2 ---");
+        AgenziaConsegne a = new AgenziaConsegne();
+        PaccoSpedizione[] pacchi = {new PaccoSpedizione("PS2463", 5), new PaccoSpedizione("NH999", 1) , new PaccoSpedizione("JK901", 100) , new PaccoSpedizione("PL863", 70)};
+        boolean[] risultati = a.spedisci(pacchi);
+        for (int i = 0; i < risultati.length; i++) {
+            System.out.println(risultati[i]);
+        }
     }
 }
