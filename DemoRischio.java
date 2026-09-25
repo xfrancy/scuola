@@ -154,21 +154,20 @@ class GestioneRischio {
     }
 }
 
-
-    class AgenziaConsegne {
-        private boolean tentaConsegna(PaccoSpedizione p){
-            return Math.random()*100 > p.getValoreRischio();
-        }
-
-        public boolean[] spedisci(PaccoSpedizione[] pacchi){
-            boolean[] risultati = new boolean[pacchi.length];
-
-            for (int i = 0; i < pacchi.length; i++) {
-                risultati[i] = tentaConsegna(pacchi[i]);
-            }
-            return risultati;
-        }
+class AgenziaConsegne {
+    
+    private boolean tentaConsegna(PaccoSpedizione p){
+        return Math.random()*100 > p.getValoreRischio();
     }
+
+    public boolean[] spedisci(PaccoSpedizione[] pacchi){
+        boolean[] risultati = new boolean[pacchi.length];
+        for (int i = 0; i < pacchi.length; i++) {
+            risultati[i] = tentaConsegna(pacchi[i]);
+        }
+        return risultati;
+    }
+}
 
 /*
 Questa classe contiene il metodo main e sono inseriti i test per il funzionamento del sistema.
