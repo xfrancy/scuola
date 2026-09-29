@@ -1,6 +1,6 @@
 package passioni;
 
-public class Libro extends Passione implements Classificabile{
+public class Libro extends Passione{
     private final String autore;
     private final String ISBN;
     private final int pagine;
@@ -19,6 +19,8 @@ public class Libro extends Passione implements Classificabile{
 
     @Override
     public String toString() {
-        return "[" + getClass().getSimpleName() + "]" + super.toString();
+        return "[LIBRO] " + super.toString();
     }
+
+    
 }

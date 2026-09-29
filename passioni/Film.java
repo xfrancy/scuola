@@ -1,6 +1,6 @@
 package passioni;
 
-public class Film extends Passione implements Classificabile {
+public class Film extends Passione {
     private final String regitsa;
     private final int anno;
     private final String attore;
@@ -14,8 +14,6 @@ public class Film extends Passione implements Classificabile {
         this.attrice = attrice;
     }
 
-    
-
     @Override
     public String nomeClassifica() {
         return titolo + " di " + regitsa + " (starring " + attore + " , " + attrice + ")";
@@ -25,7 +23,7 @@ public class Film extends Passione implements Classificabile {
 
     @Override
     public String toString() {
-        return "[" + getClass().getSimpleName() + "]" + super.toString();
+        return "[FILM] " + super.toString();
     }
 
     

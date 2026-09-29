@@ -1,6 +1,6 @@
 package passioni;
 
-public class Musica extends Passione implements Classificabile{
+public class Musica extends Passione{
     private final String artista;
     private final int tracce;
 
@@ -17,6 +17,6 @@ public class Musica extends Passione implements Classificabile{
 
     @Override
     public String toString() {
-        return "[" + getClass().getSimpleName() + "]" + super.toString();
+        return "[DISCO] " + super.toString();
     }
 }
