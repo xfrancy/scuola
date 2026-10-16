@@ -1,5 +1,7 @@
-public class Lista<T> {
-    private class Nodo {
+package liste;
+
+public class List<T> {
+    protected class Nodo {
         private final T dato;
         private Nodo succ;
 
@@ -26,9 +28,9 @@ public class Lista<T> {
         }
     }
 
-    private Nodo testa;
+    protected Nodo testa;
 
-    public Lista() {
+    public List() {
         this.testa = null;
     }
 
@@ -92,13 +94,18 @@ public class Lista<T> {
 
     }
 
+    public void stampaLista(){
+        Nodo temp = this.testa;
+        for (int i = 0; i < this.length(); i++) {
+            System.out.print(temp.getDato() + " ");
+            temp = temp.getSucc();
+        }
+        System.out.println("");
+    }
+
     public static void main(String[] args) {
-        Lista<Integer> ints = new Lista<>();
-        ints.add(5);
-        ints.add(9);
-        ints.add(2);
-        ints.add(19);
-        ints.remove(0);
+        List<Integer> ints = new List<>();
+        ints.insert(43, 0);
         System.out.println(ints.get(0)); 
 
     }
