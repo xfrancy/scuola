@@ -56,6 +56,9 @@ public class List<T> {
     }
 
     public void insert(T dato , int i){
+        if (this instanceof SortedList) {
+            throw new MetodoNonUtilizzabileException("Metodo non esiste per questa lista");
+        }
         if (i < 0 || i > length()){
             throw new IndexOutOfBoundsException();
         }

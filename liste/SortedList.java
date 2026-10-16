@@ -1,8 +1,8 @@
 package liste;
 
 public class SortedList<T  extends Comparable<T>> extends List<T> {
-    @Override
-    public void insert(T dato, int i) {
+
+    public void insert(T dato){
         if (this.testa == null){
             this.testa = new Nodo(dato);
             return;
@@ -21,16 +21,20 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
         else this.testa = nuovo;
     }
 
+    @Override
+    public void add(T dato) {
+        insert(dato);
+    }
 
     public static void main(String[] args) {
         SortedList<Integer> l = new SortedList<>();
-        l.insert(1, 0);
-        l.insert(2, 0);
-        l.insert(4, 0);
+        l.insert(1);
+        l.insert(2);
+        l.insert(4);
         l.stampaLista();
-        l.insert(3, 0);
+        l.insert(3);
         l.stampaLista();
-        l.insert(-5, 0);
+        l.insert(-5);
         l.stampaLista();
         l.add(-1);
         l.add(-7);
@@ -38,5 +42,6 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
         l.add(3);
         l.add(-7);
         l.stampaLista();
+        l.insert(2, 0);
     }
 }
