@@ -20,8 +20,8 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
     }
 
     public void insertSorted(T dato){
-        if (!this.isSorted) {
-            sort();
+        if (!this.isSorted) { 
+            this.sort();
         }
         if (this.testa == null){
             this.testa = new Nodo(dato);
@@ -61,18 +61,13 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
         do {
             swapped = false;
             for (int i = 0; i < length - count -1; i++) {
-                Nodo temp = testa.getSucc();
-                Nodo prec = testa;
-                if (prec.getDato().compareTo(temp.getDato()) > 0){
+                if (get(i).compareTo(get(i +1)) > 0){
                     swap(i, i +1);
                     swapped = true;
                 }
-                prec = temp;
-                temp = temp.getSucc();
             }
             count++;
         } while (swapped);
-        
         this.isSorted = true;
     }
 
@@ -87,7 +82,6 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
             temp2.setSucc(temp3.getSucc());
             temp3.setSucc(temp2);
             testa = temp3;
-
         } else {
             temp1.setSucc(temp3);
             temp2.setSucc(temp3.getSucc());
@@ -98,11 +92,11 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
 
     public static void main(String[] args) {
         SortedList<Integer> r = new SortedList<>();
-        r.insert(3, 0);
-        r.insert(1, 1);
-        r.insert(7, 2);
-        r.insert(4, 3);
-        r.sort();
+        r.add(3);
+        r.add(1);
+        r.add(7);
+        r.add(4);
+        r.insertSorted(9);
         r.stampaLista();
     }
 }
