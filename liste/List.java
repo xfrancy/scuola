@@ -1,6 +1,12 @@
 package liste;
 
-public class List<T> {
+import java.util.Iterator;
+
+import javax.swing.text.AttributeSet;
+import javax.swing.text.html.HTML.Tag;
+
+
+public class List<T> implements Iterable<T> {
     protected class Nodo {
         private final T dato;
         private Nodo succ;
@@ -26,6 +32,27 @@ public class List<T> {
         public void setSucc(Nodo succ) {
             this.succ = succ;
         }
+    }
+      
+    protected class Iteratore implements Iterator<T>{
+        private Nodo cursore;
+   
+        public Iteratore() {
+            cursore = testa;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return cursore.getDato() != null;
+        }
+
+        @Override
+        public T next() {
+            T temp = cursore.getDato();
+            cursore = cursore.getSucc();
+            return temp;
+        }
+        
     }
 
     protected Nodo testa;
@@ -56,9 +83,6 @@ public class List<T> {
     }
 
     public void insert(T dato , int i){
-        if (this instanceof SortedList) {
-            throw new MetodoNonUtilizzabileException("Metodo non esiste per questa lista");
-        }
         if (i < 0 || i > length()){
             throw new IndexOutOfBoundsException();
         }
@@ -74,6 +98,13 @@ public class List<T> {
             Nodo nuovo = new Nodo(dato, temp.getSucc());
             temp.setSucc(nuovo);
         }
+    }
+
+    
+
+    @Override
+    public java.util.Iterator<T> iterator() {
+        return new Iteratore();
     }
 
     public void add(T dato){
@@ -110,6 +141,5 @@ public class List<T> {
         List<Integer> ints = new List<>();
         ints.insert(43, 0);
         System.out.println(ints.get(0)); 
-
     }
 }
