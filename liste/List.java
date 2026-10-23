@@ -2,9 +2,6 @@ package liste;
 
 import java.util.Iterator;
 
-import javax.swing.text.AttributeSet;
-import javax.swing.text.html.HTML.Tag;
-
 
 public class List<T> implements Iterable<T> {
     protected class Nodo {
@@ -43,7 +40,7 @@ public class List<T> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            return cursore.getDato() != null;
+            return cursore != null;
         }
 
         @Override
@@ -129,17 +126,31 @@ public class List<T> implements Iterable<T> {
     }
 
     public void stampaLista(){
-        Nodo temp = this.testa;
-        for (int i = 0; i < this.length(); i++) {
-            System.out.print(temp.getDato() + " ");
-            temp = temp.getSucc();
+        this.forEach(t -> IO.print(t + " "));
+        IO.println("");
+    }
+
+    public void swap(int pos1 , int pos2){
+        Nodo temp1 = null, temp2 = null, temp3 = testa;
+        for (int i = 0; i < pos2; i++) {
+            temp1 = temp2;
+            temp2 = temp3;
+            temp3 = temp3.getSucc();
         }
-        System.out.println("");
+        if (temp1 == null){
+            temp2.setSucc(temp3.getSucc());
+            temp3.setSucc(temp2);
+            testa = temp3;
+        } else {
+            temp1.setSucc(temp3);
+            temp2.setSucc(temp3.getSucc());
+            temp3.setSucc(temp2);
+        }
     }
 
     public static void main(String[] args) {
         List<Integer> ints = new List<>();
         ints.insert(43, 0);
-        System.out.println(ints.get(0)); 
+        System.out.println(ints.get(0));
     }
 }

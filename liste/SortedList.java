@@ -71,23 +71,6 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
         this.isSorted = true;
     }
 
-    private void swap(int pos1 , int pos2){
-        Nodo temp1 = null, temp2 = null, temp3 = testa;
-        for (int i = 0; i < pos2; i++) {
-            temp1 = temp2;
-            temp2 = temp3;
-            temp3 = temp3.getSucc();
-        }
-        if (temp1 == null){
-            temp2.setSucc(temp3.getSucc());
-            temp3.setSucc(temp2);
-            testa = temp3;
-        } else {
-            temp1.setSucc(temp3);
-            temp2.setSucc(temp3.getSucc());
-            temp3.setSucc(temp2);
-        }
-    }
 
 
     public static void main(String[] args) {
