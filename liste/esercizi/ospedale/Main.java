@@ -1,4 +1,4 @@
-package liste.ospedale;
+package liste.esercizi.ospedale;
 
 import liste.SortedList;
 

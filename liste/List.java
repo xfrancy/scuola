@@ -202,6 +202,27 @@ public class List<T> implements Iterable<T>{
         return listaFiltrata;
     }
 
+    public boolean contains(T e){
+        for (T t : this) {
+            if (t.equals(e)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int indexOf(T e){
+        int count = 0;
+        for (T t : this) {
+            if (t.equals(e)) return count;
+            count++;
+        }
+        return -1;
+    }
+
+    public void remove(T e){
+        this.remove(this.indexOf(e));
+    }
 
     public static void main(String[] args) {
         List<Integer> ints = new List<>();

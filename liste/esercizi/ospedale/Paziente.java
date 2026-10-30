@@ -1,4 +1,4 @@
-package liste.ospedale;
+package liste.esercizi.ospedale;
 
 public class Paziente implements Comparable<Paziente>{
     private String nome;    
