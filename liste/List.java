@@ -1,9 +1,10 @@
 package liste;
 
 import java.util.Iterator;
+import java.util.function.Predicate;
 
 
-public class List<T> implements Iterable<T> {
+public class List<T> implements Iterable<T>{
     protected class Nodo {
         private final T dato;
         private Nodo succ;
@@ -193,9 +194,24 @@ public class List<T> implements Iterable<T> {
     }
 
 
+    public List<T> filer(Predicate<T> f){
+        List<T> listaFiltrata = new List<>();
+        this.forEach(e -> {
+            if(f.test(e)) listaFiltrata.add(e);
+        });
+        return listaFiltrata;
+    }
+
+
     public static void main(String[] args) {
         List<Integer> ints = new List<>();
-        ints.insert(43, 0);
-        System.out.println(ints.get(0));
+        ints.add(0);
+        ints.add(1);
+        ints.add(2);
+        ints.add(3);
+        ints.add(4);
+        ints.add(5);
+        ints = ints.filer(n -> n % 2 == 0);
+        ints.stampaLista();
     }
 }
