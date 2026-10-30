@@ -62,7 +62,7 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
             swapped = false;
             for (int i = 0; i < length - count -1; i++) {
                 if (get(i).compareTo(get(i +1)) > 0){
-                    swap(i, i +1);
+                    swapConsecutive(i, i +1);
                     swapped = true;
                 }
             }

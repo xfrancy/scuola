@@ -130,7 +130,7 @@ public class List<T> implements Iterable<T> {
         IO.println("");
     }
 
-    public void swap(int pos1 , int pos2){
+    public void swapConsecutive(int pos1 , int pos2){
         Nodo temp1 = null, temp2 = null, temp3 = testa;
         for (int i = 0; i < pos2; i++) {
             temp1 = temp2;
@@ -147,6 +147,51 @@ public class List<T> implements Iterable<T> {
             temp3.setSucc(temp2);
         }
     }
+
+        public void swap(int pos1, int pos2) {
+        if (pos1 > pos2) {
+            throw new IllegalArgumentException("La prima posizione deve essere minore della seconda");
+        }
+
+        if (pos1 == pos2) return;
+
+        int length = length();
+
+        if (pos1 < 0 || pos1 >= length || pos2 < 0 || pos2 >= length) {
+            throw new IndexOutOfBoundsException("Posizione fuori dai limiti");
+        }
+
+        Nodo temp1 = null, temp2 = testa;
+        Nodo temp3 = null, temp4 = testa;
+
+        for (int i = 0; i < pos1; i++) {
+            temp1 = temp2;
+            temp2 = temp2.getSucc();
+        }
+
+        for (int i = 0; i < pos2; i++) {
+            temp3 = temp4;
+            temp4 = temp4.getSucc();
+        }
+
+        if (temp1 == null) {
+            testa = temp4;
+        } else {
+            temp1.setSucc(temp4);
+        }
+
+        if (temp3 == temp2) {
+            temp2.setSucc(temp4.getSucc());
+            temp4.setSucc(temp2);
+        } else {
+            Nodo temp5 = temp2.getSucc();
+
+            temp2.setSucc(temp4.getSucc());
+            temp4.setSucc(temp5);
+            temp3.setSucc(temp2);
+        }
+    }
+
 
     public static void main(String[] args) {
         List<Integer> ints = new List<>();
