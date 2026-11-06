@@ -53,10 +53,12 @@ public class List<T> implements Iterable<T>{
         
     }
 
+    protected int l;
     protected Nodo testa;
 
     public List() {
         this.testa = null;
+        this.l = 0;
     }
 
     public int length() {
@@ -70,7 +72,7 @@ public class List<T> implements Iterable<T>{
     }
 
     public T get(int i){
-        if (i < 0 || i >= this.length()){
+        if (i < 0 || i >= l){
             throw new IndexOutOfBoundsException();
         }
         Nodo temp = this.testa;
@@ -81,7 +83,7 @@ public class List<T> implements Iterable<T>{
     }
 
     public void insert(T dato , int i){
-        if (i < 0 || i > length()){
+        if (i < 0 || i > l){
             throw new IndexOutOfBoundsException();
         }
         if (i == 0){
@@ -96,6 +98,7 @@ public class List<T> implements Iterable<T>{
             Nodo nuovo = new Nodo(dato, temp.getSucc());
             temp.setSucc(nuovo);
         }
+        l++;
     }
 
     
@@ -106,11 +109,11 @@ public class List<T> implements Iterable<T>{
     }
 
     public void add(T dato){
-        insert(dato, this.length());
+        insert(dato, l);
     }
 
     public void remove(int i){
-        if (i < 0 || i >= length()){
+        if (i < 0 || i >= l){
             throw new IndexOutOfBoundsException();
         }
         if (i == 0){
@@ -123,7 +126,7 @@ public class List<T> implements Iterable<T>{
             }
             temp.setSucc(temp.getSucc().getSucc());
         }
-
+        l--;
     }
 
     public void stampaLista(){
@@ -156,9 +159,8 @@ public class List<T> implements Iterable<T>{
 
         if (pos1 == pos2) return;
 
-        int length = length();
 
-        if (pos1 < 0 || pos1 >= length || pos2 < 0 || pos2 >= length) {
+        if (pos1 < 0 || pos1 >= l || pos2 < 0 || pos2 >= l) {
             throw new IndexOutOfBoundsException("Posizione fuori dai limiti");
         }
 
@@ -222,6 +224,10 @@ public class List<T> implements Iterable<T>{
 
     public void remove(T e){
         this.remove(this.indexOf(e));
+    }
+
+    public boolean isEmpty(){
+        return l == 0;
     }
 
     public static void main(String[] args) {

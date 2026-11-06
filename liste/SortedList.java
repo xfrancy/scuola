@@ -55,12 +55,11 @@ public class SortedList<T  extends Comparable<T>> extends List<T> {
 
     public void sort(){
         if (isSorted) return;
-        int length = length();
         boolean swapped;
         int count = 0;
         do {
             swapped = false;
-            for (int i = 0; i < length - count -1; i++) {
+            for (int i = 0; i < l - count -1; i++) {
                 if (get(i).compareTo(get(i +1)) > 0){
                     swapConsecutive(i, i +1);
                     swapped = true;
