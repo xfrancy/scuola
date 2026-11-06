@@ -70,12 +70,12 @@ public class DoubleLinkedList<T> implements Iterable<T>{
     }
 
     @Override
-    public java.util.Iterator<T> iterator() {
+    public Iterator<T> iterator() {
         return new Iteratore();
     }
 
 
-    protected int l = 0;
+    protected int l;
     protected Nodo testa;
     protected Nodo coda;
 
@@ -83,6 +83,7 @@ public class DoubleLinkedList<T> implements Iterable<T>{
     public DoubleLinkedList() {
         this.testa = null;
         this.coda = null;
+        this.l = 0;
     }
 
 
@@ -197,13 +198,17 @@ public class DoubleLinkedList<T> implements Iterable<T>{
         Nodo temp = testa;
         Nodo temp2 = coda;
 
-        for (int i = 0; i < ((l % 2 == 1) ? (l / 2) +1 : (l / 2) ); i++) {
+        for (int i = 0; i < (l + 1) / 2; i++) {
             if (temp.getDato().equals(dato) || (temp2.getDato().equals(dato))) return true;
             temp = temp.getSucc();
             temp2 = temp2.prec;
         }
         
         return false;
+    }
+
+    public boolean isEmpty(){
+        return l == 0;
     }
 
     public void add(T dato){

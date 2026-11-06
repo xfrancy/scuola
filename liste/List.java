@@ -104,7 +104,7 @@ public class List<T> implements Iterable<T>{
     
 
     @Override
-    public java.util.Iterator<T> iterator() {
+    public Iterator<T> iterator() {
         return new Iteratore();
     }
 
