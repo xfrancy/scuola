@@ -194,11 +194,138 @@ public class DoubleLinkedList<T> implements Iterable<T>{
         l--;
     }
 
+    public void swap(int pos1 , int pos2){
+          if (pos1 < 0 || pos1 >= l) {
+            throw new IndexOutOfBoundsException("Posizione " + pos1 + " fuori dai limiti");
+        }
+
+        if (pos2 < 0 || pos2 >= l) {
+            throw new IndexOutOfBoundsException("Posizione " + pos2 + " fuori dai limiti");
+        }
+
+        if (pos1 > pos2) {
+            throw new IllegalArgumentException("La prima posizione deve essere minore della seconda");
+        }
+
+        if (pos1 == pos2) return;
+
+        Nodo scanTesta, scanCoda;
+
+        if (pos1 < getPuntoMedio()) {
+            scanTesta = testa;
+
+
+            for (int i = 0; i < pos1; i++) {
+                scanTesta = scanTesta.getSucc();
+            }
+        }
+
+        else {
+            scanTesta = coda;
+
+            for (int i = l - 1; pos1 < i; i--) {
+                scanTesta = scanTesta.getPrec();
+            }
+        }
+        
+        if (pos2 < getPuntoMedio()) {
+            scanCoda = testa;
+
+            for (int i = 0; i < pos2; i++) {
+                scanCoda = scanCoda.getSucc();
+            }
+        }
+
+        else {
+            scanCoda = coda;
+
+            for (int i = l - 1; pos2 < i; i--) {
+                scanCoda = scanCoda.getPrec();
+            }
+        }
+
+        if (scanTesta.getSucc() == scanCoda){
+            scanTesta.setSucc(scanCoda.getSucc());
+            scanCoda.setPrec(scanTesta.getPrec());
+            scanCoda.setSucc(scanTesta);
+            scanTesta.setPrec(scanCoda);
+
+            if (scanTesta != testa)  scanCoda.getPrec().setSucc(scanCoda);
+            if (scanCoda != coda)  scanTesta.getSucc().setPrec(scanTesta);
+
+            if (scanTesta == testa) testa = scanCoda;
+            if (scanCoda == coda) coda = scanTesta;
+            
+            
+        }
+        else if (scanTesta == testa && scanCoda != coda) {
+            Nodo temp = scanTesta.getSucc();
+            scanTesta.getSucc().setPrec(scanCoda);
+            scanCoda.getPrec().setSucc(scanTesta);
+            scanCoda.getSucc().setPrec(scanTesta);
+
+            scanTesta.setPrec(scanCoda.getPrec());
+            scanCoda.setPrec(null);
+
+            scanTesta.setSucc(scanCoda.getSucc());
+            scanCoda.setSucc(temp);
+            testa = scanCoda;
+        }
+
+        else if (scanCoda == coda && scanTesta != testa) {
+            Nodo temp = scanCoda.getPrec();
+            scanCoda.getPrec().setSucc(scanTesta);
+            scanTesta.getPrec().setSucc(scanCoda);
+            scanTesta.getSucc().setPrec(scanCoda);
+
+            scanCoda.setSucc(scanTesta.getSucc());
+            scanTesta.setSucc(null);
+
+            scanCoda.setPrec(scanTesta.getPrec());
+            scanTesta.setPrec(temp);
+
+            coda = scanTesta;
+        }
+
+        else if (scanTesta == testa && scanCoda == coda){
+            scanCoda.setSucc(scanTesta.getSucc());
+            scanTesta.setPrec(scanCoda.getPrec());
+
+            scanTesta.setSucc(null);
+            scanCoda.setPrec(null);
+
+            scanTesta.getPrec().setSucc(scanTesta);
+            scanCoda.getSucc().setPrec(scanCoda);
+
+            testa = scanCoda;
+            coda = scanTesta;
+        }
+
+        else {
+            Nodo temp = scanTesta;
+            scanTesta.getPrec().setSucc(scanCoda);
+            scanTesta.getSucc().setPrec(scanCoda);
+
+            scanCoda.getPrec().setSucc(scanTesta);
+            scanCoda.getSucc().setPrec(scanTesta);
+
+            scanTesta.setPrec(scanCoda.getPrec());
+            scanTesta.setSucc(scanCoda.getSucc());
+            
+            scanCoda.setPrec(temp.getPrec());
+            scanCoda.setSucc(temp.getSucc());
+        }
+    }    
+    
+    private int getPuntoMedio(){
+        return (l + 1) / 2;
+    }
+
     public boolean contains(T dato){
         Nodo temp = testa;
         Nodo temp2 = coda;
 
-        for (int i = 0; i < (l + 1) / 2; i++) {
+        for (int i = 0; i < getPuntoMedio(); i++) {
             if (temp.getDato().equals(dato) || (temp2.getDato().equals(dato))) return true;
             temp = temp.getSucc();
             temp2 = temp2.prec;
@@ -220,6 +347,14 @@ public class DoubleLinkedList<T> implements Iterable<T>{
         IO.println("");
     }
 
+    public void stampaListaAlContrario(){
+        Nodo temp = coda;
+        for (int i = 0; i < l; i++) {
+            System.out.print(temp.getDato() + " ");
+            temp = temp.getPrec();
+        }
+    }
+
 
     public static void main(String[] args) {
         DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
@@ -228,12 +363,10 @@ public class DoubleLinkedList<T> implements Iterable<T>{
         list.insert(10, 2);
         list.insert(0, 3);
         list.insert(9, 2);
-        list.insert(90, 0);
-        list.insert(50, 2);
-        list.stampaLista();
-        list.remove(list.length()-1);
-        list.remove(4);
-        list.remove(1);
-        list.stampaLista();
+        list.stampaListaAlContrario();
+        System.out.println();
+        list.swap(2, 3);
+        list.stampaListaAlContrario();
+
     }
 }
