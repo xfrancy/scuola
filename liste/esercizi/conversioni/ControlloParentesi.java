@@ -1,13 +1,9 @@
 package liste.esercizi.conversioni;
-
-import CodePile.Coda;
 import liste.Stack;
 
 public class ControlloParentesi {
-    private Coda c;
     private Stack<Character> aperte;
-   
-
+    
     public ControlloParentesi() {
         this.aperte = new Stack<>();
     }
