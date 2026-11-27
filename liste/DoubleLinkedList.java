@@ -365,7 +365,7 @@ public class DoubleLinkedList<T> implements Iterable<T>{
         list.insert(9, 2);
         list.stampaListaAlContrario();
         System.out.println();
-        list.swap(2, 3);
+        list.swap(1, 3);
         list.stampaListaAlContrario();
 
     }
